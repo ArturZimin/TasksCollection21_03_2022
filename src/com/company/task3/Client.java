@@ -1,32 +1,62 @@
 package com.company.task3;
 
-import java.util.Date;
-import java.util.Random;
+import java.util.Comparator;
+import java.util.Objects;
 
-public class Client implements Runnable {
-    Date date = new Date();
-    Random random = new Random();
+public class Client implements Comparable<Client> {
 
+    private String firstName;
+    private String lastName;
+    private String location;
 
-    @Override
-    public void run() {
-        int i = 0;
-        while (i < 1000) {
-            String time = date.toString();
-            synchronized (this) {
-                TaskThree.server.add((random.nextInt(100)));
-                TaskThree.statistic.add(time + Thread.currentThread().getName());
-                try {
-                    System.out.println(TaskThree.statistic.toString());
-                } catch (NullPointerException n) {
-                    System.out.println("Collection is empty!");
-                }
+    public Client(String firstName, String lastName, String location) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.location = location;
+    }
+    public Client(){}
 
-            }
+    public String getFirstName() {
+        return firstName;
+    }
 
-            i++;
-        }
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getLocation() {
+        return location;
     }
 
 
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Client client = (Client) o;
+        return Objects.equals(firstName, client.firstName) && Objects.equals(lastName, client.lastName) && Objects.equals(location, client.location);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, location);
+    }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", location='" + location + '\'' +
+                '}';
+    }
+
+
+    @Override
+    public int compareTo(Client o) {
+
+        return this.getLocation().compareTo(o.getLocation());
+    }
 }

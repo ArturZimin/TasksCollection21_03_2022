@@ -1,31 +1,45 @@
 package com.company.task3;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 public class TaskThree {
-    public static Queue statistic = new LinkedList();
-    public static Queue<Integer> server = new LinkedList<>();
+    public static Queue<Statistic> statistic = new LinkedList<>();
+    public static SortedSet<Client> server = new TreeSet<Client>();
 
 
     public static void main(String[] args) {
 
+        TaskThree t=new TaskThree();
 
-        Thread clientOne = new Thread(new Client());
-        Thread clientTwo = new Thread(new Client());
-        Thread clientThree = new Thread(new Client());
-        Thread clientFour = new Thread(new Client());
-        clientOne.setPriority(7);
-        clientTwo.setPriority(9);
-        clientThree.setPriority(8);
-        clientFour.setPriority(7);
-        clientOne.start();
-        clientTwo.start();
-        clientThree.start();
-        clientFour.start();
+        Client client1 = new Client("Artur", "Zimin", "Minsk");
+        Client client2 = new Client("Vasiliy", "Ivanov", "Grodno");
+        Client client3 = new Client("Dima", "Kolos", "Vitebsk");
+        Client client4 = new Client("Katia", "Pavlova", "Baranovici");
+        Client client5 = new Client("Kiril", "Boyko", "Mogilev");
 
+        server.add(client1);
+        statistic.add(new Statistic(new Date(), client1));
+        server.add(client2);
+        statistic.add(new Statistic(new Date(), client2));
+        server.add(client3);
+        statistic.add(new Statistic(new Date(), client3));
+        server.add(client4);
+        statistic.add(new Statistic(new Date(), client4));
+        server.add(client5);
+        statistic.add(new Statistic(new Date(), client5));
+        t.showStatistic();
+        t.showClients();
 
     }
+
+    public void showStatistic(){
+        statistic.forEach(x-> System.out.println(x));
+    }
+    public void showClients(){
+        server.forEach(x-> System.out.println(x));
+    }
+
+
 
 
     /**

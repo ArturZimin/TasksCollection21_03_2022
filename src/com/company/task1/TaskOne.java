@@ -14,7 +14,6 @@ public class TaskOne {
 
     public static void main(String[] args) throws IOException {
 
-
         System.out.println("Enter a set of numbers separated by a space! Example : 12 2 33 44 .");
 
         String str = br.readLine();
@@ -139,6 +138,9 @@ public class TaskOne {
             }
         }
     }
+
+
+
 
     public static int readLineWithBufferedReader() {
 
